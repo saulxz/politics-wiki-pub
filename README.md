@@ -1,6 +1,6 @@
 # 🏛️ politics-wiki
 
-Enciclopedia libre y sin servidor sobre **ideologías políticas, partidos, sistemas de gobierno, geopolítica, organizaciones internacionales, pensadores y conceptos**, con formato de enciclopedia, referencias verificables y contenido íntegramente en español.
+Enciclopedia libre y sin servidor sobre **ideologías políticas, partidos, sistemas de gobierno, geopolítica, organizaciones internacionales, pensadores y conceptos**, con formato de enciclopedia, referencias verificables y contenido íntegramente en español. web en internet: https://politics-wiki.pages.dev/
 
 ![Licencia del código: MIT](https://img.shields.io/badge/licencia-MIT-6da13f)
 ![Contenido: CC BY-SA 4.0](https://img.shields.io/badge/contenido-CC--BY--SA_4.0-2a4b8d)
