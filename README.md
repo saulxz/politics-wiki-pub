@@ -1,6 +1,8 @@
 # 🏛️ politics-wiki
 
-Enciclopedia libre y sin servidor sobre **ideologías políticas, partidos, sistemas de gobierno, geopolítica, organizaciones internacionales, pensadores y conceptos**, con formato de enciclopedia, referencias verificables y contenido íntegramente en español. web en internet: https://politics-wiki.pages.dev/
+Enciclopedia libre y sin servidor sobre **ideologías políticas, partidos, sistemas de gobierno, geopolítica, organizaciones internacionales, pensadores y conceptos**, con formato de enciclopedia, referencias verificables y contenido íntegramente en español.
+
+🌐 **Web en vivo:** https://politics-wiki.pages.dev/
 
 ![Licencia del código: MIT](https://img.shields.io/badge/licencia-MIT-6da13f)
 ![Contenido: CC BY-SA 4.0](https://img.shields.io/badge/contenido-CC--BY--SA_4.0-2a4b8d)
@@ -24,7 +26,7 @@ Un sitio estático con formato de enciclopedia en el que cada tema es una entrad
 | 🗺️ Geopolítica | 10 | Órdenes, bloques y conflictos | orden multipolar, guerra en Ucrania |
 | 🌐 Organizaciones | 10 | Organismos, bloques y tratados | ONU, OTAN, FMI, Unión Europea |
 | 📚 Pensadores | 4 | Autores y su legado teórico | Marx, Rawls, Hayek, Arendt |
-| 💡 Conceptos | 4 | Nociónes políticas fundamentales | soberanía, separación de poderes |
+| 💡 Conceptos | 4 | Nociones políticas fundamentales | soberanía, separación de poderes |
 
 **Sin servidor, sin compilación, sin dependencias, sin CDN:** el sitio funciona abriendo `index.html` directamente desde el disco, bajo `file://`.
 
