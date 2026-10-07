@@ -1,0 +1,33 @@
+# politics-wiki · cabeceras de seguridad (Cloudflare Pages)
+#
+# CSP calculada para este sitio concreto (auditado 29/09/2026):
+#   - Sin fetch/XHR/WebSocket/modules: connect-src 'none'
+#   - Sin fuentes remotas ni @font-face: font-src 'self'
+#   - Sin <base>: base-uri 'none'
+#   - Sin imágenes remotas; favicon es data: (icono SVG inline)
+#   - Único script inline: el anti-flash del tema en <head> de las 3 páginas
+#     (idéntico texto) -> cubierto por su hash sha256.
+#   - sin 'unsafe-inline' ni 'unsafe-eval' en ningún sitio.
+# render.js ya aplica sus pocos estilos en línea vía CSSOM (style.setProperty),
+# que una CSP estricta permite: no usa setAttribute('style').
+#
+# /sw.js lleva su PROPIA sección, más abajo, con connect-src 'self' a cambio de
+# 'none'. Motivo: el service worker precachea las 120 rutas del sitio en su
+# install (caches.addAll -> fetch interno), y una CSP connect-src 'none' en la
+# respuesta del propio sw.js bloquea esos fetch y hace fallar el registro.
+# Las páginas (/*) mantienen 'none'; solo el worker necesita alcanzar su mismo
+# origen. Única diferencia entre ambas secciones: connect-src.
+
+/*
+  Content-Security-Policy: default-src 'none'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests; script-src 'self' 'sha256-ugtGNhPvutuBkKRhSwOGLmZZMmbjFUbG/moLQeLz84U='; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; media-src 'none'; worker-src 'self'; manifest-src 'self'
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: no-referrer
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), fullscreen=(), autoplay=(), encrypted-media=(), picture-in-picture=(), display-capture=(), gamepad=(), gyroscope=(), identity-credentials-get=(), idle-detection=(), magnetometer=(), midi=(), otp-credentials=(), publickey-credentials-create=(), publickey-credentials-get=(), screen-wake-lock=(), serial=(), storage-access=(), sync-xhr=(), unload=(), window-management=()
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+/sw.js
+  ! Content-Security-Policy
+  Content-Security-Policy: default-src 'none'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'none'; worker-src 'self'; manifest-src 'self'

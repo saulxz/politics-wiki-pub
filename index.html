@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Politics Wiki — Enciclopedia de Ideologías Políticas</title>
+<meta name="description" content="Enciclopedia en español sobre las ideologías políticas y económicas de la era moderna: liberalismo, anarquismo, fascismo, capitalismo, socialismo, comunismo, marxismo y leninismo.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='6'%20fill='%232a4b8d'/%3E%3Cpath%20d='M4.5%208.5c3.6-1.5%207.2-1.5%2010.5%200v15c-3.3-1.5-6.9-1.5-10.5%200z'%20fill='%23ffffff'/%3E%3Cpath%20d='M17%208.5c3.3-1.5%206.9-1.5%2010.5%200v15c-3.6-1.5-7.2-1.5-10.5%200z'%20fill='%23c8d4ea'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/wiki.css">
+<link rel="manifest" href="manifest.webmanifest">
+<!-- Anti-flash: aplica las preferencias guardadas antes del primer pintado (FEATURES.md §6.1). -->
+<script>
+try { var p = JSON.parse(localStorage.getItem('politics-wiki:prefs') || '{}'), d = document.documentElement;
+  if (p.theme) d.setAttribute('data-pw-theme', p.theme);
+  if (p.size) d.setAttribute('data-pw-size', p.size);
+  if (p.measure) d.setAttribute('data-pw-measure', p.measure);
+} catch (e) {}
+</script>
+</head>
+<body class="pw-body">
+
+<div class="pw-progress" aria-hidden="true"><div class="pw-progress-bar" id="pw-progress-bar"></div></div>
+
+<header class="pw-header">
+  <a class="pw-brand" href="index.html">
+    <span class="pw-brand-mark">PW</span>
+    <span class="pw-brand-text">Politics Wiki</span>
+  </a>
+  <form class="pw-search pw-search-cabecera" id="pw-search-cabecera" role="search" aria-label="Buscar en la cabecera" autocomplete="off" hidden>
+    <input class="pw-search-input" type="search" placeholder="Buscar artículos..." aria-label="Buscar">
+    <div class="pw-search-results" hidden></div>
+  </form>
+  <nav class="pw-header-links">
+    <a class="pw-header-link" href="index.html#articulos">Artículos</a>
+    <a class="pw-header-link" href="index.html#categorias">Categorías</a>
+  </nav>
+  <div class="pw-tools">
+    <button type="button" class="pw-btn" id="pw-btn-search"
+            title="Buscar (/)" aria-label="Buscar"
+            aria-expanded="false" aria-controls="pw-search-cabecera">
+      <span class="pw-btn-glyph" aria-hidden="true">
+        <svg class="pw-btn-icon" viewBox="0 0 16 16" width="15" height="15" focusable="false" aria-hidden="true"><circle cx="6.8" cy="6.8" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="10.3" y1="10.3" x2="14" y2="14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </span>
+    </button>
+    <button type="button" class="pw-btn" id="pw-btn-random"
+            title="Artículo aleatorio (r)" aria-label="Artículo aleatorio">
+      <span class="pw-btn-glyph" aria-hidden="true">⤨</span>
+    </button>
+    <button type="button" class="pw-btn" id="pw-btn-favs"
+            title="Mis artículos (f)" aria-label="Mis artículos"
+            aria-expanded="false" aria-controls="pw-favs-panel">
+      <span class="pw-btn-glyph" aria-hidden="true">★</span>
+      <span class="pw-btn-badge" id="pw-favs-count" hidden>0</span>
+    </button>
+    <button type="button" class="pw-btn" id="pw-btn-prefs"
+            title="Preferencias de lectura (p)" aria-label="Preferencias de lectura"
+            aria-expanded="false" aria-controls="pw-prefs-panel">
+      <span class="pw-btn-glyph" aria-hidden="true">Aa</span>
+    </button>
+    <button type="button" class="pw-btn" id="pw-btn-help"
+            title="Atajos de teclado (?)" aria-label="Atajos de teclado"
+            aria-expanded="false" aria-controls="pw-help-modal">
+      <span class="pw-btn-glyph" aria-hidden="true">?</span>
+    </button>
+
+    <div class="pw-popover" id="pw-prefs-panel" hidden role="dialog" aria-label="Preferencias de lectura">
+      <div class="pw-popover-title">Preferencias de lectura</div>
+
+      <div class="pw-pref-row">
+        <span class="pw-pref-label" id="pw-theme-label">Tema</span>
+        <div class="pw-segmented" role="radiogroup" aria-labelledby="pw-theme-label">
+          <button type="button" class="pw-seg" data-theme="claro" role="radio" aria-checked="true">Claro</button>
+          <button type="button" class="pw-seg" data-theme="oscuro" role="radio" aria-checked="false">Oscuro</button>
+          <button type="button" class="pw-seg" data-theme="sepia" role="radio" aria-checked="false">Sepia</button>
+          <button type="button" class="pw-seg" data-theme="auto" role="radio" aria-checked="false">Auto</button>
+        </div>
+      </div>
+
+      <div class="pw-pref-row">
+        <span class="pw-pref-label" id="pw-size-label">Tamaño de texto</span>
+        <div class="pw-stepper" role="group" aria-labelledby="pw-size-label">
+          <button type="button" class="pw-step" id="pw-size-down" aria-label="Reducir texto">A−</button>
+          <span class="pw-step-value" id="pw-size-value" aria-live="polite">Normal</span>
+          <button type="button" class="pw-step" id="pw-size-up" aria-label="Aumentar texto">A+</button>
+        </div>
+      </div>
+
+      <div class="pw-pref-row">
+        <span class="pw-pref-label" id="pw-measure-label">Ancho de columna</span>
+        <div class="pw-segmented" role="radiogroup" aria-labelledby="pw-measure-label">
+          <button type="button" class="pw-seg" data-measure="estrecha" role="radio" aria-checked="false">Estrecha</button>
+          <button type="button" class="pw-seg" data-measure="normal" role="radio" aria-checked="true">Normal</button>
+          <button type="button" class="pw-seg" data-measure="amplia" role="radio" aria-checked="false">Amplia</button>
+        </div>
+      </div>
+
+      <div class="pw-pref-row pw-pref-row-end">
+        <button type="button" class="pw-btn-text" id="pw-prefs-reset">Restablecer</button>
+      </div>
+    </div>
+
+    <div class="pw-popover pw-popover-wide" id="pw-favs-panel" hidden role="dialog" aria-label="Mis artículos">
+      <div class="pw-popover-title">Mis artículos</div>
+      <div class="pw-favs" id="pw-favs-list"></div>
+      <div class="pw-empty" id="pw-favs-empty" hidden>Todavía no has guardado ningún artículo.</div>
+    </div>
+  </div>
+</header>
+
+<div class="pw-layout">
+
+  <nav class="pw-sidebar" aria-label="Navegación principal">
+    <input class="pw-nav-toggle" type="checkbox" id="pw-nav-open">
+    <label class="pw-sidebar-toggle" for="pw-nav-open">Menú de navegación</label>
+
+    <div class="pw-sidebar-title">Navegación</div>
+    <ul class="pw-nav-list">
+      <li class="pw-nav-item"><a class="pw-nav-link pw-nav-link-active" href="index.html" aria-current="page">Portada</a></li>
+      <li class="pw-nav-item"><a class="pw-nav-link" href="espectro.html">Mapa del espectro</a></li>
+    </ul>
+
+    <div class="pw-sidebar-title">Ideologías económicas</div>
+    <ul class="pw-nav-list">
+      <li class="pw-nav-item"><a class="pw-nav-link" href="article.html?title=capitalismo">Capitalismo</a></li>
+      <li class="pw-nav-item"><a class="pw-nav-link" href="article.html?title=capitalismo-de-estado">Capitalismo de Estado</a></li>
+      <li class="pw-nav-item"><a class="pw-nav-link" href="article.html?title=socialismo">Socialismo</a></li>
+      <li class="pw-nav-item"><a class="pw-nav-link" href="article.html?title=comunismo">Comunismo</a></li>
+    </ul>
+
+    <div class="pw-sidebar-title">Ideologías políticas</div>
+    <ul class="pw-nav-list">
+      <li class="pw-nav-item"><a class="pw-nav-link" href="article.html?title=liberalismo">Liberalismo</a></li>
+      <li class="pw-nav-item"><a class="pw-nav-link" href="article.html?title=anarquismo">Anarquismo</a></li>
+      <li class="pw-nav-item"><a class="pw-nav-link" href="article.html?title=fascismo">Fascismo</a></li>
+    </ul>
+
+    <div class="pw-sidebar-title">Teorías y doctrinas</div>
+    <ul class="pw-nav-list">
+      <li class="pw-nav-item"><a class="pw-nav-link" href="article.html?title=marxismo">Marxismo</a></li>
+      <li class="pw-nav-item"><a class="pw-nav-link" href="article.html?title=leninismo">Leninismo</a></li>
+    </ul>
+  </nav>
+
+  <main class="pw-main">
+    <div class="pw-home">
+
+      <section class="pw-hero">
+        <h1 class="pw-hero-title">Enciclopedia de Ideologías Políticas</h1>
+        <p class="pw-hero-sub">Historia, doctrina y figuras de los principales movimientos políticos y económicos de la era moderna.</p>
+
+        <form class="pw-search pw-search-page" id="buscador-input" role="search" aria-label="Buscar artículos en la portada" autocomplete="off">
+          <input class="pw-search-input" type="search" placeholder="Buscar artículos..." aria-label="Buscar artículos">
+          <div class="pw-search-results" hidden></div>
+        </form>
+      </section>
+
+      <!-- Conmutador de dominio: entre el héroe y la primera sección de contenido (CONTRACT-V3.md §8.1). Los contadores los rellena el motor desde PW.list(kind).length. -->
+      <nav class="pw-domains" id="pw-domains" aria-label="Secciones de la enciclopedia">
+        <button type="button" class="pw-domain" data-dominio="ideologia" aria-pressed="true">Ideologías <span class="pw-domain-count">29</span></button>
+        <button type="button" class="pw-domain" data-dominio="partido" aria-pressed="false">Partidos <span class="pw-domain-count">30</span></button>
+        <button type="button" class="pw-domain" data-dominio="geopolitica" aria-pressed="false">Geopolítica <span class="pw-domain-count">10</span></button>
+        <button type="button" class="pw-domain" data-dominio="organizacion" aria-pressed="false">Organizaciones <span class="pw-domain-count">10</span></button>
+        <button type="button" class="pw-domain" data-dominio="gobierno" aria-pressed="false">Gobiernos <span class="pw-domain-count">21</span></button>
+        <button type="button" class="pw-domain" data-dominio="pensador" aria-pressed="false">Pensadores <span class="pw-domain-count">4</span></button>
+        <button type="button" class="pw-domain" data-dominio="concepto" aria-pressed="false">Conceptos <span class="pw-domain-count">4</span></button>
+      </nav>
+
+      <section class="pw-section" id="articulos">
+        <h2 class="pw-h2"><span class="pw-headline">Artículos</span></h2>
+        <nav class="pw-azindex" id="pw-azindex" aria-label="Índice alfabético"></nav>
+        <div class="pw-card-grid" id="articulos-grid"></div>
+      </section>
+
+      <section class="pw-section" id="categorias">
+        <h2 class="pw-h2"><span class="pw-headline">Categorías</span></h2>
+        <div class="pw-browse" id="categorias-browse"></div>
+      </section>
+
+    </div>
+  </main>
+
+</div>
+
+<footer class="pw-footer">
+  <p class="pw-footer-text">El contenido de este sitio está disponible bajo licencia <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener">CC BY-SA 4.0</a>.</p>
+  <nav class="pw-footer-nav" aria-label="Navegación del pie">
+    <a href="index.html">Portada</a><span aria-hidden="true">·</span><a href="espectro.html">Mapa del espectro</a><span aria-hidden="true">·</span><a href="about.html">Acerca de</a><span aria-hidden="true">·</span><a href="index.html#articulos">Índice A–Z</a>
+  </nav>
+  <p class="pw-footer-keys">Atajos: <kbd>/</kbd> buscar <span aria-hidden="true">·</span> <kbd>r</kbd> aleatorio <span aria-hidden="true">·</span> <kbd>f</kbd> favoritos <span aria-hidden="true">·</span> <kbd>p</kbd> preferencias <span aria-hidden="true">·</span> <kbd>t</kbd> arriba <span aria-hidden="true">·</span> <kbd>?</kbd> ayuda</p>
+  <p class="pw-footer-contact">¿Erratas, correcciones o ideas? <a href="https://github.com/saulxz/politics-wiki-pub/issues" rel="noopener">Abre una incidencia</a></p>
+  <p class="pw-footer-colophon">29 artículos · 7 dominios · 108 entradas · sin rastreadores ni cookies. El tema y tus artículos favoritos se guardan solo en este navegador.</p>
+</footer>
+
+<button type="button" class="pw-totop" id="pw-totop" hidden aria-label="Volver arriba">
+  <span aria-hidden="true">↑</span>
+</button>
+
+<dialog class="pw-modal" id="pw-help-modal" aria-label="Atajos de teclado">
+  <div class="pw-modal-title">Atajos de teclado</div>
+  <dl class="pw-keys">
+    <div class="pw-key-row"><dt><kbd>/</kbd></dt><dd>Ir al buscador</dd></div>
+    <div class="pw-key-row"><dt><kbd>r</kbd></dt><dd>Artículo aleatorio</dd></div>
+    <div class="pw-key-row"><dt><kbd>f</kbd></dt><dd>Añadir o quitar de mis artículos</dd></div>
+    <div class="pw-key-row"><dt><kbd>p</kbd></dt><dd>Preferencias de lectura</dd></div>
+    <div class="pw-key-row"><dt><kbd>t</kbd></dt><dd>Volver arriba</dd></div>
+    <div class="pw-key-row"><dt><kbd>?</kbd></dt><dd>Abrir y cerrar esta ayuda</dd></div>
+    <div class="pw-key-row"><dt><kbd>Esc</kbd></dt><dd>Cerrar lo que esté abierto</dd></div>
+  </dl>
+  <button type="button" class="pw-btn-text" id="pw-help-close">Cerrar</button>
+</dialog>
+
+<!-- 1 · Datos: un script por artículo, ANTES del renderizador -->
+<script src="js/data/liberalismo.js" defer></script>
+<script src="js/data/anarquismo.js" defer></script>
+<script src="js/data/fascismo.js" defer></script>
+<script src="js/data/capitalismo.js" defer></script>
+<script src="js/data/capitalismo-de-estado.js" defer></script>
+<script src="js/data/socialismo.js" defer></script>
+<script src="js/data/comunismo.js" defer></script>
+<script src="js/data/marxismo.js" defer></script>
+<script src="js/data/leninismo.js" defer></script>
+<script src="js/data/anarcosindicalismo.js" defer></script>
+<script src="js/data/conservadurismo.js" defer></script>
+<script src="js/data/democracia-cristiana.js" defer></script>
+<script src="js/data/ecopolitica.js" defer></script>
+<script src="js/data/federalismo.js" defer></script>
+<script src="js/data/feminismo.js" defer></script>
+<script src="js/data/igualitarismo.js" defer></script>
+<script src="js/data/libertarianismo.js" defer></script>
+<script src="js/data/nacionalismo.js" defer></script>
+<script src="js/data/pacifismo.js" defer></script>
+<script src="js/data/reformismo.js" defer></script>
+<script src="js/data/sindicalismo.js" defer></script>
+<script src="js/data/socialdemocracia.js" defer></script>
+<script src="js/data/totalitarismo.js" defer></script>
+<script src="js/data/keynesianismo.js" defer></script>
+<script src="js/data/maoismo.js" defer></script>
+<script src="js/data/populismo.js" defer></script>
+<script src="js/data/islamismo-politico.js" defer></script>
+<script src="js/data/ilustrismo.js" defer></script>
+<script src="js/data/militarismo.js" defer></script>
+
+<!-- 1b · Partidos (CONTRACT-V3.md §5.2) -->
+<script src="js/data/parties/ppsoe.js" defer></script>
+<script src="js/data/parties/partido-popular.js" defer></script>
+<script src="js/data/parties/vox.js" defer></script>
+<script src="js/data/parties/partido-democrata.js" defer></script>
+<script src="js/data/parties/partido-republicano.js" defer></script>
+<script src="js/data/parties/partido-libertario.js" defer></script>
+<script src="js/data/parties/partido-laborista.js" defer></script>
+<script src="js/data/parties/partido-conservador.js" defer></script>
+<script src="js/data/parties/liberales-democratas.js" defer></script>
+<script src="js/data/parties/spd.js" defer></script>
+<script src="js/data/parties/cdu.js" defer></script>
+<script src="js/data/parties/afd.js" defer></script>
+<script src="js/data/parties/partido-socialista.js" defer></script>
+<script src="js/data/parties/los-republicanos.js" defer></script>
+<script src="js/data/parties/renaissance.js" defer></script>
+<script src="js/data/parties/partito-democratico.js" defer></script>
+<script src="js/data/parties/fratelli-ditalia.js" defer></script>
+<script src="js/data/parties/forza-italia.js" defer></script>
+<script src="js/data/parties/partido-dos-trabalhadores.js" defer></script>
+<script src="js/data/parties/partido-social-democrata.js" defer></script>
+<script src="js/data/parties/partido-liberal-social.js" defer></script>
+<script src="js/data/parties/morena.js" defer></script>
+<script src="js/data/parties/pri.js" defer></script>
+<script src="js/data/parties/pan.js" defer></script>
+<script src="js/data/parties/podemos.js" defer></script>
+<script src="js/data/parties/sumar.js" defer></script>
+<script src="js/data/parties/erc.js" defer></script>
+<script src="js/data/parties/junts.js" defer></script>
+<script src="js/data/parties/pnv.js" defer></script>
+<script src="js/data/parties/eh-bildu.js" defer></script>
+
+<!-- 1c · Geopolítica (CONTRACT-V3.md §5.3) -->
+<script src="js/data/geo/orden-multipolar.js" defer></script>
+<script src="js/data/geo/guerra-en-ucrania.js" defer></script>
+<script src="js/data/geo/competencia-estados-unidos-china.js" defer></script>
+<script src="js/data/geo/energia-y-dependencias.js" defer></script>
+<script src="js/data/geo/comercio-y-globalizacion.js" defer></script>
+<script src="js/data/geo/inestabilidad-sahel.js" defer></script>
+<script src="js/data/geo/migraciones-y-demografia.js" defer></script>
+<script src="js/data/geo/carrera-tecnologica.js" defer></script>
+<script src="js/data/geo/proceso-soberanista-catalan.js" defer></script>
+<script src="js/data/geo/violencia-politica-vasca.js" defer></script>
+
+<!-- 1d · Organizaciones (CONTRACT-V3.md §5.4) -->
+<script src="js/data/orgs/onu.js" defer></script>
+<script src="js/data/orgs/otan.js" defer></script>
+<script src="js/data/orgs/union-europea.js" defer></script>
+<script src="js/data/orgs/fmi.js" defer></script>
+<script src="js/data/orgs/banco-mundial.js" defer></script>
+<script src="js/data/orgs/omc.js" defer></script>
+<script src="js/data/orgs/aiea.js" defer></script>
+<script src="js/data/orgs/oms.js" defer></script>
+<script src="js/data/orgs/brics.js" defer></script>
+<script src="js/data/orgs/g20.js" defer></script>
+
+<!-- 1e · Gobiernos (CONTRACT-V3.md §5.5) -->
+<script src="js/data/gobiernos/china.js" defer></script>
+<script src="js/data/gobiernos/corea-del-norte.js" defer></script>
+<script src="js/data/gobiernos/rusia.js" defer></script>
+<script src="js/data/gobiernos/japon.js" defer></script>
+<script src="js/data/gobiernos/india.js" defer></script>
+<script src="js/data/gobiernos/alemania.js" defer></script>
+<script src="js/data/gobiernos/francia.js" defer></script>
+<script src="js/data/gobiernos/estados-unidos.js" defer></script>
+<script src="js/data/gobiernos/austria.js" defer></script>
+<script src="js/data/gobiernos/dinamarca.js" defer></script>
+<script src="js/data/gobiernos/espana.js" defer></script>
+<script src="js/data/gobiernos/italia.js" defer></script>
+<script src="js/data/gobiernos/polonia.js" defer></script>
+<script src="js/data/gobiernos/portugal.js" defer></script>
+<script src="js/data/gobiernos/suecia.js" defer></script>
+<script src="js/data/gobiernos/belgica.js" defer></script>
+<script src="js/data/gobiernos/bulgaria.js" defer></script>
+<script src="js/data/gobiernos/chipre.js" defer></script>
+<script src="js/data/gobiernos/eslovaquia.js" defer></script>
+<script src="js/data/gobiernos/eslovenia.js" defer></script>
+<script src="js/data/gobiernos/estonia.js" defer></script>
+
+<!-- 1f · Pensadores (CONTRACT-V3.md §2) -->
+<script src="js/data/pensadores/marx.js" defer></script>
+<script src="js/data/pensadores/hayek.js" defer></script>
+<script src="js/data/pensadores/rawls.js" defer></script>
+<script src="js/data/pensadores/arendt.js" defer></script>
+
+<!-- 1g · Conceptos (CONTRACT-V3.md §2) -->
+<script src="js/data/conceptos/democracia.js" defer></script>
+<script src="js/data/conceptos/soberania.js" defer></script>
+<script src="js/data/conceptos/estado-de-derecho.js" defer></script>
+<script src="js/data/conceptos/separacion-de-poderes.js" defer></script>
+
+<!-- 2 · Lógica -->
+<script src="js/render.js" defer></script>
+<script src="js/search.js" defer></script>
+<script src="js/app.js" defer></script>
+
+<!-- 3 · Movimiento de entrada al hacer scroll -->
+<script src="js/motion.js" defer></script>
+
+<!-- 3b · Interacción de puntero y scroll -->
+<script src="js/interactions.js" defer></script>
+
+<!-- 4 · Capa v2 de interfaz y funciones (SIEMPRE el último) -->
+<script src="js/features.js" defer></script>
+
+</body>
+</html>

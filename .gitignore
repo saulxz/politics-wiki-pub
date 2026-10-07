@@ -1,0 +1,9 @@
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/
+
+# Caché del verificador de referencias (se regenera con tools/refcheck.js)
+tools/.refcheck-cache.json

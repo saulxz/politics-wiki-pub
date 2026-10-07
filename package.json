@@ -1,0 +1,22 @@
+{
+  "name": "politics-wiki",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Enciclopedia libre de ideology\u00edas, sistemas pol\u00edticos y econ\u00f3micos y sus principales figuras. Est\u00e1tico tipo enciclopedia, contenido en espa\u00f1ol.",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node serve.js",
+    "dev": "node serve.js"
+  },
+  "keywords": [
+    "politics",
+    "ideology",
+    "wikipedia",
+    "enciclopedia",
+    "estad\u00edstica"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}
